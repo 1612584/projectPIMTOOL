@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<!--<GridPane alignment="BASELINE_CENTER" hgap="10" prefWidth="900" vgap="10" xmlns="http://javafx.com/javafx"-->
+<!--          xmlns:fx="http://javafx.com/fxml" fx:controller="vn.elca.training.controller.EditController" >-->
+<!--    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>-->
+<!--    <ImageView fitHeight="56" fitWidth="56" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">-->
+<!--        <Image url="@/images/logo_elca.png" />-->
+<!--    </ImageView>-->
+<!--    <Label text="PROJECT INFORMATION MANAGEMENT" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />-->
+<!--    <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1" />-->
+<!--    <fx:include source="header.fxml" alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0"/>-->
+<!--    <GridPane GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">-->
+<!--        <fx:include source="menu.fxml" />-->
+<!--    </GridPane>-->
+
+<!--    <Separator orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="2"-->
+<!--              />-->
+<!--    <GridPane hgap="10.0" vgap="30.0"-->
+<!--              GridPane.columnIndex="2" GridPane.columnSpan="10" GridPane.rowIndex="2"-->
+<!--              xmlns="http://javafx.com/javafx"-->
+<!--              xmlns:fx="http://javafx.com/fxml"-->
+<!--              fx:controller="vn.elca.training.controller.EditController">-->
+<!--&lt;!&ndash;        <padding><Insets bottom="10" left="25" right="25" top="10" /></padding>&ndash;&gt;-->
+<!--        <Text text="New Project" GridPane.rowIndex="0"  />-->
+<!--        <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1"-->
+<!--                   valignment="BOTTOM" styleClass="separator-bottom" />-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="2" minWidth="150">-->
+<!--            <Label text="Project Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" styleClass="invalid"/>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="3" minWidth="150">-->
+<!--            <Label text="Project Name" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="3" />-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="4" minWidth="150">-->
+<!--            <Label text="Customer" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="4" />-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="5" minWidth="150">-->
+<!--            <Label text="Group" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="5" >-->
+<!--        </ComboBox>-->
+<!--        <Label text="Members" GridPane.columnSpan="3" GridPane.rowIndex="6" minWidth="150" />-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="6" />-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="7" minWidth="150">-->
+<!--            <Label text="Status" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="7">-->
+
+<!--        </ComboBox>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="8" minWidth="150">-->
+<!--            <Label text="Start Date" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <DatePicker prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="8" />-->
+<!--        <Label text="End Date" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="8" />-->
+<!--        <DatePicker prefWidth="149" GridPane.columnIndex="18" GridPane.rowIndex="8" />-->
+<!--        <Button minWidth="130.0" prefWidth="130.0" text="Cancel" GridPane.columnIndex="4"-->
+<!--                GridPane.columnSpan="2" GridPane.rowIndex="9" />-->
+<!--        <Button minWidth="130.0" prefWidth="130.0" text="Create Project"-->
+<!--                GridPane.columnIndex="18" GridPane.columnSpan="3" GridPane.rowIndex="9" />-->
+<!--        <stylesheets>-->
+<!--            <URL value="@/styles/edit.css" />-->
+<!--        </stylesheets>-->
+<!--    </GridPane>-->
+<!--    -->
+<!--</GridPane>-->
+<VBox
+          xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+         >
+    <!--        <padding><Insets bottom="10" left="25" right="25" top="10" /></padding>-->
+    <GridPane hgap="10.0" vgap="30.0">
+        <Text text="New Project" GridPane.rowIndex="0"  />
+        <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1"
+                   valignment="BOTTOM" styleClass="separator-bottom" />
+            <HBox GridPane.columnSpan="3" GridPane.rowIndex="2" minWidth="150">
+                <Label text="Project Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Text styleClass="red-star" text=" *" />
+            </HBox>
+        <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="projectNumberTxt" styleClass="format-number"/>
+
+        <HBox GridPane.columnSpan="3" GridPane.rowIndex="3" minWidth="150">
+            <Label text="Project Name" />
+            <Text styleClass="red-star" text=" *" />
+        </HBox>
+        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
+                   GridPane.rowIndex="3" fx:id="projectNameTxt"/>
+        <HBox GridPane.columnSpan="3" GridPane.rowIndex="4" minWidth="150">
+            <Label text="Customer" />
+            <Text styleClass="red-star" text=" *" />
+        </HBox>
+        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
+                   GridPane.rowIndex="4" fx:id="customerTxt"/>
+        <HBox GridPane.columnSpan="3" GridPane.rowIndex="5" minWidth="150">
+            <Label text="Group" />
+            <Text styleClass="red-star" text=" *" />
+        </HBox>
+        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="5"  fx:id="groupCbb">
+        </ComboBox>
+        <Label text="Members" GridPane.columnSpan="3" GridPane.rowIndex="6" minWidth="150" />
+        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
+                   GridPane.rowIndex="6" fx:id="membersTxt"/>
+        <HBox GridPane.columnSpan="3" GridPane.rowIndex="7" minWidth="150">
+            <Label text="Status" />
+            <Text styleClass="red-star" text=" *" />
+        </HBox>
+        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="7" fx:id="statusInp">
+
+        </ComboBox>
+        <HBox GridPane.columnSpan="3" GridPane.rowIndex="8" minWidth="150">
+            <Label text="Start Date" />
+            <Text styleClass="red-star" text=" *" />
+        </HBox>
+        <DatePicker prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="8" fx:id="startDate" styleClass="format-date"/>
+        <Label text="End Date" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="8" />
+        <DatePicker prefWidth="149" GridPane.columnIndex="18" GridPane.rowIndex="8" fx:id="endDate"  styleClass="format-date"/>
+        <Button minWidth="130.0" prefWidth="130.0" text="Cancel" GridPane.columnIndex="4"
+                GridPane.columnSpan="2" GridPane.rowIndex="9" fx:id="cancelBtn"/>
+        <Button minWidth="130.0" prefWidth="130.0" text="Create Project"
+                GridPane.columnIndex="18" GridPane.columnSpan="3" GridPane.rowIndex="9" fx:id="submitBtn"/>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@/styles/edit.css" />
+    </stylesheets>
+</VBox>
+<!--<fx:root-->
+<!--       type="javafx.scene.layout.VBox"-->
+<!--       xmlns:fx="http://javafx.com/fxml">-->
+<!--    &lt;!&ndash;        <padding><Insets bottom="10" left="25" right="25" top="10" /></padding>&ndash;&gt;-->
+<!--    <GridPane hgap="10.0" vgap="30.0">-->
+<!--        <Text text="New Project" GridPane.rowIndex="0"  />-->
+<!--        <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1"-->
+<!--                   valignment="BOTTOM" styleClass="separator-bottom" />-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="2" minWidth="150">-->
+<!--            <Label text="Project Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="projectNumberTxt"/>-->
+
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="3" minWidth="150">-->
+<!--            <Label text="Project Name" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="3" fx:id="projectNameTxt"/>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="4" minWidth="150">-->
+<!--            <Label text="Customer" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="4" fx:id="customerTxt"/>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="5" minWidth="150">-->
+<!--            <Label text="Group" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="5"  fx:id="groupCbb">-->
+<!--        </ComboBox>-->
+<!--        <Label text="Members" GridPane.columnSpan="3" GridPane.rowIndex="6" minWidth="150" />-->
+<!--        <TextField GridPane.columnIndex="3" GridPane.columnSpan="16" GridPane.rowIndex="6" fx:id="membersTxt"/>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="7" minWidth="150">-->
+<!--            <Label text="Status" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="7" fx:id="statusCbb">-->
+
+<!--        </ComboBox>-->
+<!--        <HBox GridPane.columnSpan="3" GridPane.rowIndex="8" minWidth="150">-->
+<!--            <Label text="Start Date" />-->
+<!--            <Text styleClass="red-star" text=" *" />-->
+<!--        </HBox>-->
+<!--        <DatePicker prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="8" fx:id="startDate"/>-->
+<!--        <Label text="End Date" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="8" />-->
+<!--        <DatePicker prefWidth="149" GridPane.columnIndex="18" GridPane.rowIndex="8" fx:id="endDate" />-->
+<!--        <Button minWidth="130.0" prefWidth="130.0" text="Cancel" GridPane.columnIndex="4"-->
+<!--                GridPane.columnSpan="2" GridPane.rowIndex="9" fx:id="cancelBtn"/>-->
+<!--        <Button minWidth="130.0" prefWidth="130.0" text="Create Project"-->
+<!--                GridPane.columnIndex="18" GridPane.columnSpan="3" GridPane.rowIndex="9" fx:id="submitBtn"/>-->
+<!--    </GridPane>-->
+
+<!--    <stylesheets>-->
+<!--        <URL value="@/styles/edit.css" />-->
+<!--    </stylesheets>-->
+<!--</fx:root>-->

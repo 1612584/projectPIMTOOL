@@ -1,0 +1,9 @@
+
+S
+java:S1128"6Remove this unused import 'javafx.fxml.Initializable'.(™ÎùÆ8Í›Ñ‰Ò.
+]	java:S125"<This block of commented-out lines of code should be removed.(ãÌå†ûÿÿÿÿ8Í›Ñ‰Ò.
+X	java:S1255"<This block of commented-out lines of code should be removed.(ê×ê«8Í›Ñ‰Ò.
+R
+java:S1128	"0Remove this unused import 'javafx.stage.Window'.(Ñ€Ş‡øÿÿÿÿ8Í›Ñ‰Ò.
+T
+java:S2629-"7Use the built-in formatting to construct this argument.(ú‚Œå8Í›Ñ‰Ò.

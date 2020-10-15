@@ -1,0 +1,6 @@
+.format-date {
+    -fx-alignment: center;
+}
+.format-number {
+    -fx-alignment: center-right;
+}

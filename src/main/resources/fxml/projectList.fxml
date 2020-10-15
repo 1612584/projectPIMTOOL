@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import vn.elca.training.factory.CheckBoxTableCellFactory?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="30" >
+    <Text styleClass="header" text="Project List" />
+    <Separator valignment="BOTTOM" styleClass="separator-bottom"/>
+    <HBox spacing="5">
+        <TextField prefWidth="250" promptText="Project number, name, customer, name" fx:id="nameInp"/>
+        <ComboBox fx:id="statusInp" promptText="Project status">
+        </ComboBox>
+        <Button text="Search Project" fx:id="searchBtn"/>
+        <Button text="Reset Search" fx:id="resetBtn"/>
+    </HBox>
+    <TableView fx:id="projectTable">
+        <columns>
+            <TableColumn>
+                <cellFactory>
+                    <CheckBoxTableCellFactory />
+                </cellFactory>
+            </TableColumn>
+            <TableColumn text="Number" fx:id="projectNumberColumn" styleClass="format-number">
+                <cellValueFactory>
+                    <PropertyValueFactory property="projectNumber" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Name">
+                <cellValueFactory><PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Status">
+                <cellValueFactory>
+                    <PropertyValueFactory property="status" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Customer">
+                <cellValueFactory>
+                    <PropertyValueFactory property="customer" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Start Date" styleClass="format-date" fx:id="dateColumn">
+                <cellValueFactory>
+                    <PropertyValueFactory property="startDate"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Delete">
+            </TableColumn>
+        </columns>
+    </TableView>
+    <!--            <Pagination maxPageIndicatorCount="4" />-->
+</VBox>
+

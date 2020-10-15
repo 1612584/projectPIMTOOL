@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<VBox fx:controller="vn.elca.training.controller.MenuController"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <padding><Insets bottom="10"  right="25" top="10" /></padding>
+    <Text text="Project List" />
+    <Hyperlink fx:id="newLink" onAction="#onActionNew" text="New" />
+    <Hyperlink text="Project" fx:id="projectLink" onAction="#onActionNew" />
+    <Hyperlink text="Customer" />
+    <Hyperlink text="Supplier" />
+</VBox>

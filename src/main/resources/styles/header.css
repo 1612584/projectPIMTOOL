@@ -1,0 +1,7 @@
+.link:hover {
+    -fx-text-fill: black;
+    -fx-underline: false;
+}
+.link:visited {
+    -fx-text-fill: black;
+}

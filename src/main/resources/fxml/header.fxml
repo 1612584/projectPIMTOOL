@@ -1,0 +1,15 @@
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<HBox alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="vn.elca.training.controller.HeaderController"
+      stylesheets="/styles/header.css">
+    <Hyperlink text="EN" onAction="#changeLang" fx:id="enLink" styleClass="link" />
+    <Text text="|" />
+    <Hyperlink text="FR" onAction="#changeLang" fx:id="frLink" styleClass="link"/>
+    <Hyperlink text="Help" styleClass="link" />
+    <Hyperlink text="Log out" styleClass="link" />
+</HBox>
+

@@ -1,0 +1,16 @@
+.red-star {
+    -fx-color: #E46564;
+    -fx-fill: red;
+}
+.header {
+    /*-fx-font-size: 35px;*/
+    -fx-border-style: solid solid none solid;
+    -fx-border-width: 5;
+    -fx-border-color: red;
+}
+.separator-bottom {
+    -fx-end-margin: 0;
+}
+.invalid {
+
+}
