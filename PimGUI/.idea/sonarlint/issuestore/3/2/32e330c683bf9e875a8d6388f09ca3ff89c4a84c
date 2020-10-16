@@ -1,0 +1,21 @@
+
+Q
+java:S37406"/Provide the parametrized type for this generic.(µÛËşÿÿÿÿ8„šñÎÒ.
+U
+java:S1135"2Complete the task associated to this TODO comment.(É¦Üÿÿÿÿÿ8„šñÎÒ.
+F
+java:S1125¼"(Remove the literal "true" boolean value.(”Ëéš8„šñÎÒ.
+w
+java:S1450&"URemove the "bundle" field and declare it as a local variable in the relevant methods.(ş©½ûÿÿÿÿ8„šñÎÒ.
+t
+java:S3776h"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ÛŒ¦…ıÿÿÿÿ8„šñÎÒ.
+t
+java:S1450@"WRemove the "groupIds" field and declare it as a local variable in the relevant methods.(İ™ºÿ8„šñÎÒ.
+y
+java:S1450>"WRemove the "statuses" field and declare it as a local variable in the relevant methods.(«ÆÑøÿÿÿÿ8„šñÎÒ.
+Z
+java:S2629‡"7Use the built-in formatting to construct this argument.(Ñ±èÑûÿÿÿÿ8„šñÎÒ.
+S
+java:S1481»"0Remove this unused "actionEvent" local variable.(Ñ•Àæıÿÿÿÿ8„šñÎÒ.
+O
+java:S1602˜",Remove useless curly braces around statement(ŸåĞşÿÿÿÿ8„šñÎÒ.
