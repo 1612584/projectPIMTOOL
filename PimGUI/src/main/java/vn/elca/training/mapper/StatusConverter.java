@@ -14,7 +14,7 @@ public class StatusConverter extends StringConverter<ProjectStatus> {
     @Override
     public String toString(ProjectStatus status) {
         productMap.put(status.getStatus(), status);
-        return status.getStatus();
+        return status.getStatusCode();
     }
 
     @Override

@@ -163,12 +163,13 @@ public class EditController implements Initializable {
             project.setVisaList(membersTxt.getText());
             if (statusInp.getSelectionModel().getSelectedItem() != null) {
                 String statusStr = statusInp.getSelectionModel().getSelectedItem().getStatus();
-               for ( ProjectStatus status : projectStatusList) {
-                   if (status.getStatusCode().equals(statusStr) || status.getStatus().equals(statusStr) ) {
-                       project.setStatus(status.getStatus());
-                       break;
-                   }
-               }
+//               for ( ProjectStatus status : projectStatusList) {
+//                   if (status.getStatusCode().equals(statusStr) || status.getStatus().equals(statusStr) ) {
+//                       project.setStatus(status.getStatus());
+//                       break;
+//                   }
+//               }
+                project.setStatus(statusStr);
             }
             // update project value
             if (groupCbb.getSelectionModel().getSelectedItem() != null) {
