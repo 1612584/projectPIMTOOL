@@ -160,6 +160,7 @@ public class Project {
         this.projectNumber.set(projectNumber);
     }
 
+    // SHORT OR LONG status
     public String getStatus() {
         return status.get();
     }

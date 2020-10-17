@@ -4,13 +4,7 @@ import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
-import vn.elca.protobuf.GetOneRequest;
-import vn.elca.protobuf.GrpcGroupList;
-import vn.elca.protobuf.GrpcProjectDto;
-import vn.elca.protobuf.ProjectServiceGrpc;
-import vn.elca.protobuf.ResponseUpdate;
-import vn.elca.protobuf.SearchRequest;
-import vn.elca.protobuf.SearchResponse;
+import vn.elca.protobuf.*;
 import vn.elca.training.service.GrpcProjectService;
 
 @Slf4j
@@ -53,4 +47,16 @@ public class GrpcProjectController extends ProjectServiceGrpc.ProjectServiceImpl
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void deleteProject(DeleteOneRequest request, StreamObserver<ResponseUpdate> responseObserver) {
+        responseObserver.onNext(grpcProjectService.deleteProject(request));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void deleteProjectList(DeleteMultipleRequest request, StreamObserver<ResponseUpdate> responseObserver) {
+        responseObserver.onNext(grpcProjectService.deleteMultipleProject(request));
+        responseObserver.onCompleted();
+    }
 }
+

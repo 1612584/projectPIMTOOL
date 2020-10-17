@@ -3,14 +3,10 @@ package vn.elca.training.service.impl;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import vn.elca.protobuf.GetOneRequest;
-import vn.elca.protobuf.GrpcGroupList;
-import vn.elca.protobuf.GrpcProjectDto;
-import vn.elca.protobuf.ResponseUpdate;
-import vn.elca.protobuf.SearchRequest;
-import vn.elca.protobuf.SearchResponse;
+import vn.elca.protobuf.*;
 import vn.elca.training.model.dto.ProjectDto;
 import vn.elca.training.model.exception.ConcurrentUpdateException;
+import vn.elca.training.model.exception.DeletedProjectStatusCanNotBeNew;
 import vn.elca.training.service.GroupService;
 import vn.elca.training.service.GrpcProjectService;
 import vn.elca.training.service.ProjectService;
@@ -77,5 +73,30 @@ public class GrpcProjectServiceImpl implements GrpcProjectService {
                     .setMessage(ex.getMessage())
                     .build();
         }
+    }
+
+    @Override
+    public ResponseUpdate deleteProject(DeleteOneRequest request) {
+        ResponseUpdate responseUpdate = null;
+        try {
+            this.projectService.removeProjectById(request.getId());
+            responseUpdate = ResponseUpdate.newBuilder().setSuccess(true).buildPartial();
+        } catch (Exception ex) {
+            log.debug(ex.getStackTrace().toString());
+            responseUpdate = responseUpdate.toBuilder().setSuccess(false).build();
+        }
+        return responseUpdate;
+    }
+
+    @Override
+    public ResponseUpdate deleteMultipleProject(DeleteMultipleRequest request) {
+        try {
+            if (this.projectService.deleteByListId(request.getIdsList()) > 0) {
+                return ResponseUpdate.newBuilder().setSuccess(true).build();
+            }
+        } catch (DeletedProjectStatusCanNotBeNew deletedProjectStatusCanNotBeNew) {
+            deletedProjectStatusCanNotBeNew.printStackTrace();
+        }
+        return ResponseUpdate.newBuilder().setSuccess(false).build();
     }
 }

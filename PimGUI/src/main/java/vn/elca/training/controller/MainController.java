@@ -1,5 +1,6 @@
 package vn.elca.training.controller;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,13 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vn.elca.protobuf.ResponseUpdate;
 import vn.elca.training.MainApp;
 import vn.elca.training.mapper.Mapper;
 import vn.elca.training.mapper.StatusConverter;
@@ -33,6 +30,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -93,6 +92,9 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn deleteColumn;
 
+    @FXML
+    private TableColumn checkBoxColumn;
+
     private Parent editNode;
 
     private URL location;
@@ -136,12 +138,16 @@ public class MainController implements Initializable {
         // get right panel
 
 //        this.right.getChildren().add(projectListNode);
+        ProjectStatus statusNEW = new ProjectStatus("NEW", bundle.getString("status.NEW"));
 
-        statuses = FXCollections.observableArrayList(
-                new ProjectStatus("NEW", bundle.getString("status.NEW")),
+        List<ProjectStatus> projectStatusList = Arrays.asList(
+                statusNEW,
                 new ProjectStatus("PLA", bundle.getString("status.PLA")),
                 new ProjectStatus("INP", bundle.getString("status.INP")),
-                new ProjectStatus("FIN", bundle.getString("status.FIN"))
+                new ProjectStatus("FIN", bundle.getString("status.FIN")));
+
+        statuses = FXCollections.observableArrayList(
+               projectStatusList
         );
         statusInp.setConverter(new StatusConverter());
         statusInp.setItems(statuses);
@@ -210,7 +216,6 @@ public class MainController implements Initializable {
                     @Override
                     public TableCell call(final TableColumn<Project, Button> param) {
                         final TableCell<Project, Button> cell = new TableCell<Project, Button>() {
-
                             final Button btn = new Button("Delete");
 
                             @Override
@@ -221,30 +226,55 @@ public class MainController implements Initializable {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
-                                        Project person = getTableView().getItems().get(getIndex());
-                                        System.out.println(person.getProjectNumber() + " = project number click");
+                                        Project project = getTableView().getItems().get(getIndex());
+                                        System.out.println(project.getProjectNumber() + " = project number click");
+                                        // do something with id...
+                                        log.debug("click on deletebtn = project number and id " +
+                                        project.getProjectNumber() + project.getId());
+//                                         displayEditProject(project.getId());
+                                        log.debug("call delete by id = " + project.getId());
+                                        ResponseUpdate responseUpdate = ProjectServiceClient.deleteById(project.getId());
+                                        // fetch data
+                                        if (responseUpdate.getSuccess() == true) {
+                                            fetchData(name,status);
+                                        } else {
+                                            // TODO: show dialog box delete failure
+                                            log.debug("delete fail by id");
+                                        }
                                     });
-                                    setGraphic(btn);
+                                    setGraphic(null);
+                                    Project project = getTableView().getItems().get(getIndex());
+                                    // if status is new than btn is string delete;
+                                    if (bundle.getString("status." + statusNEW.getStatus())
+                                            .equals(project.getStatus())) {
+                                        setGraphic(btn);
+                                    }
                                     setText(null);
                                 }
                             }
 
                         };
-                        cell.setOnMouseClicked( event -> {
-                            if (!cell.isEmpty()) {
-                                Project project = (Project) cell.getTableRow().getItem();
-                            // do something with id...
-                            log.debug("click on deletebtn = project number and id " +
-                                    project.getProjectNumber() + project.getId());
-//                            displayEditProject(project.getId());
-                            log.debug("call delete by id = " + project.getId());
-                            // fetch data
-                            }
-                        });
+//                        cell.setOnMouseClicked( event -> {
+//                            if (!cell.isEmpty()) {
+//                                Project project = (Project) cell.getTableRow().getItem();
+//                            // do something with id...
+//                                log.debug("click on deletebtn = project number and id " +
+//                                    project.getProjectNumber() + project.getId());
+////                            displayEditProject(project.getId());
+//                                log.debug("call delete by id = " + project.getId());
+//                                ResponseUpdate responseUpdate = ProjectServiceClient.deleteById(project.getId());
+//                                // fetch data
+//                                if (responseUpdate.getSuccess() == true) {
+//                                    fetchData(name,status);
+//                                } else {
+//                                    // TODO: show dialog box delete failure
+//                                    log.debug("delete fail by id");
+//                                }
+//                            }
+//                        });
                         return cell;
                     }
                 };
-
         this.deleteColumn.setCellFactory( cellFactory
 //                cell -> {
 ////                    TableCell<Project, Button> tableCell = new TableCell<Project, Button>() {

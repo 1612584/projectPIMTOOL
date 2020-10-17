@@ -5,13 +5,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vn.elca.protobuf.GetOneRequest;
-import vn.elca.protobuf.GrpcGroupList;
-import vn.elca.protobuf.GrpcProjectDto;
-import vn.elca.protobuf.ProjectServiceGrpc;
-import vn.elca.protobuf.ResponseUpdate;
-import vn.elca.protobuf.SearchRequest;
-import vn.elca.protobuf.SearchResponse;
+import vn.elca.protobuf.*;
 import vn.elca.training.mapper.Mapper;
 import vn.elca.training.model.Project;
 
@@ -69,6 +63,15 @@ public class ProjectServiceClient {
         ProjectServiceGrpc.ProjectServiceBlockingStub stub = ProjectServiceGrpc.newBlockingStub(channel);
         GrpcProjectDto request = Mapper.toGrpcProject(project);
         ResponseUpdate response = stub.updateProject(request);
+        channel.shutdownNow();
+        return response;
+    }
+
+    public static ResponseUpdate deleteById(long id) {
+        final ManagedChannel channel = ManagedChannelBuilder.forTarget(server).usePlaintext().build();
+        ProjectServiceGrpc.ProjectServiceBlockingStub stub = ProjectServiceGrpc.newBlockingStub(channel);
+        DeleteOneRequest request = DeleteOneRequest.newBuilder().setId(id).build();
+        ResponseUpdate response = stub.deleteProject(request);
         channel.shutdownNow();
         return response;
     }

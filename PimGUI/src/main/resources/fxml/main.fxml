@@ -55,7 +55,7 @@
                 <columns>
                     <TableColumn fx:id="checkBoxColumn" styleClass="format-date">
                         <cellValueFactory>
-                            <PropertyValueFactory property="select" />
+                            <PropertyValueFactory property="select"/>
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Number" fx:id="projectNumberColumn" styleClass="format-number">
