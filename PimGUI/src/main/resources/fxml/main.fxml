@@ -82,7 +82,10 @@
                             <PropertyValueFactory property="startDate"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Delete">
+                    <TableColumn text="Delete" fx:id="deleteColumn">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="deleteBtn" />
+                        </cellValueFactory>
                     </TableColumn>
                 </columns>
             </TableView>

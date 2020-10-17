@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 import java.awt.*;
@@ -22,6 +23,7 @@ public class Project {
     private SimpleObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
     private SimpleStringProperty visaList = new SimpleStringProperty();
     private CheckBox select = new CheckBox();
+    private Button deleteBtn = new Button();
 
     public Project() {
     }
@@ -188,5 +190,13 @@ public class Project {
 
     public void setSelect(CheckBox select) {
         this.select = select;
+    }
+
+    public Button getDeleteBtn() {
+        return deleteBtn;
+    }
+
+    public void setDeleteBtn(Button deleteBtn) {
+        this.deleteBtn = deleteBtn;
     }
 }

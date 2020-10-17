@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.elca.training.MainApp;
@@ -88,6 +89,9 @@ public class MainController implements Initializable {
 
     @FXML
     private VBox projectListVBox;
+
+    @FXML
+    private TableColumn deleteColumn;
 
     private Parent editNode;
 
@@ -198,6 +202,76 @@ public class MainController implements Initializable {
                 log.debug("cancel on main controller");
             });
         }
+
+        //  initialize delete btn
+        Callback<TableColumn<Project, Button>, TableCell<Project, Button>> cellFactory
+                = //
+                new Callback<TableColumn<Project, Button>, TableCell<Project, Button>>() {
+                    @Override
+                    public TableCell call(final TableColumn<Project, Button> param) {
+                        final TableCell<Project, Button> cell = new TableCell<Project, Button>() {
+
+                            final Button btn = new Button("Delete");
+
+                            @Override
+                            public void updateItem(Button item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    btn.setOnAction(event -> {
+                                        Project person = getTableView().getItems().get(getIndex());
+                                        System.out.println(person.getProjectNumber() + " = project number click");
+                                    });
+                                    setGraphic(btn);
+                                    setText(null);
+                                }
+                            }
+
+                        };
+                        cell.setOnMouseClicked( event -> {
+                            if (!cell.isEmpty()) {
+                                Project project = (Project) cell.getTableRow().getItem();
+                            // do something with id...
+                            log.debug("click on deletebtn = project number and id " +
+                                    project.getProjectNumber() + project.getId());
+//                            displayEditProject(project.getId());
+                            log.debug("call delete by id = " + project.getId());
+                            // fetch data
+                            }
+                        });
+                        return cell;
+                    }
+                };
+
+        this.deleteColumn.setCellFactory( cellFactory
+//                cell -> {
+////                    TableCell<Project, Button> tableCell = new TableCell<Project, Button>() {
+////                        @Override
+////                        protected void updateItem(Button item, boolean empty) {
+////                            super.updateItem(item, empty) ;
+////                            if (item != null) {
+////                                item.setText("Delete");
+////                            }
+//////                            setText("Delete");
+////                        }
+////                    };
+//                    tableCell.setOnMouseClicked(e -> {
+//                        if (!tableCell.isEmpty()) {
+//                            Project project = (Project) tableCell.getTableRow().getItem();
+//                            // do something with id...
+//                            log.debug("click on deletebtn = project number and id "+
+//                                    project.getProjectNumber() + project.getId());
+////                            displayEditProject(project.getId());
+//                            log.debug("call delete by id = " + project.getId());
+//                            // fetch data
+//                        }
+//                    });
+//                    return tableCell;
+//                }
+        );
+
     }
 
     public void onUpdateSuccess(boolean success) throws IOException {
