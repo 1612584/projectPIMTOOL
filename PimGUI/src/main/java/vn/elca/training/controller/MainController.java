@@ -216,7 +216,7 @@ public class MainController implements Initializable {
                     @Override
                     public TableCell call(final TableColumn<Project, Button> param) {
                         final TableCell<Project, Button> cell = new TableCell<Project, Button>() {
-                            final Button btn = new Button("Delete");
+                            final Button btn = new Button(bundle.getString("table.btn.delete"));
 
                             @Override
                             public void updateItem(Button item, boolean empty) {

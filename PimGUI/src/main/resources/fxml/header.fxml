@@ -6,10 +6,10 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="vn.elca.training.controller.HeaderController"
       stylesheets="/styles/header.css">
-    <Hyperlink text="EN" onAction="#changeLang" fx:id="enLink" styleClass="link" />
+    <Hyperlink text="%header.en" onAction="#changeLang" fx:id="enLink" styleClass="link" />
     <Text text="|" />
-    <Hyperlink text="FR" onAction="#changeLang" fx:id="frLink" styleClass="link"/>
-    <Hyperlink text="Help" styleClass="link" />
-    <Hyperlink text="Log out" styleClass="link" />
+    <Hyperlink text="%header.fr" onAction="#changeLang" fx:id="frLink" styleClass="link"/>
+    <Hyperlink text="%header.help" styleClass="link" />
+    <Hyperlink text="%header.logout" styleClass="link" />
 </HBox>
 
