@@ -90,6 +90,17 @@
                 </columns>
             </TableView>
             <!--            <Pagination maxPageIndicatorCount="4" />-->
+            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+                <children>
+                    <Region prefHeight="200.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                    <Label text="%table.msg.deletemultiple" />
+                    <VBox alignment="TOP_RIGHT" prefWidth="100.0">
+                        <children>
+                            <Button text="%table.btn.delete" />
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
         </VBox>
     </GridPane>
     <!-- right end -->

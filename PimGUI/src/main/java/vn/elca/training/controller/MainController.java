@@ -149,6 +149,9 @@ public class MainController implements Initializable {
         statuses = FXCollections.observableArrayList(
                projectStatusList
         );
+
+
+
         statusInp.setConverter(new StatusConverter());
         statusInp.setItems(statuses);
         dateColumn.setCellFactory(column -> new TableCell<String , LocalDate>() {
