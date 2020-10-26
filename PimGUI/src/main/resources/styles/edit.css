@@ -14,3 +14,8 @@
 .invalid {
 
 }
+/*error waring for text field required or invalid, text field is class default for javafx.controls.TextField*/
+.text-field.error {
+    -fx-text-box-border: red ;
+    -fx-focus-color: red ;
+}
