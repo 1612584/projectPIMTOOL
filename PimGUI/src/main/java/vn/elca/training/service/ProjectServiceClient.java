@@ -75,4 +75,13 @@ public class ProjectServiceClient {
         channel.shutdownNow();
         return response;
     }
+
+    public static ResponseUpdate deleteMultipleProject(List<Long> listId) {
+        final ManagedChannel channel = ManagedChannelBuilder.forTarget(server).usePlaintext().build();
+        ProjectServiceGrpc.ProjectServiceBlockingStub stub = ProjectServiceGrpc.newBlockingStub(channel);
+        DeleteMultipleRequest request = DeleteMultipleRequest.newBuilder().addAllIds(listId).build();
+        ResponseUpdate response = stub.deleteProjectList(request);
+        channel.shutdownNow();
+        return response;
+    }
 }

@@ -96,7 +96,7 @@
                     <Label text="%table.msg.deletemultiple" />
                     <VBox alignment="TOP_RIGHT" prefWidth="100.0">
                         <children>
-                            <Button text="%table.btn.delete" />
+                            <Button text="%table.btn.delete" onAction="#deleteMultiple" />
                         </children>
                     </VBox>
                 </children>
