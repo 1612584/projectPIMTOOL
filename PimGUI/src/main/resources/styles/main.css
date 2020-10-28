@@ -4,3 +4,6 @@
 .format-number {
     -fx-alignment: center-right;
 }
+.main-title {
+    -fx-font-size: 20;
+}
