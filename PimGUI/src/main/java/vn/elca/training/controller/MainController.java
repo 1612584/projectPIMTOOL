@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
 
@@ -149,6 +150,9 @@ public class MainController implements Initializable {
         statuses = FXCollections.observableArrayList(
                projectStatusList
         );
+
+
+
         statusInp.setConverter(new StatusConverter());
         statusInp.setItems(statuses);
         dateColumn.setCellFactory(column -> new TableCell<String , LocalDate>() {
@@ -216,7 +220,7 @@ public class MainController implements Initializable {
                     @Override
                     public TableCell call(final TableColumn<Project, Button> param) {
                         final TableCell<Project, Button> cell = new TableCell<Project, Button>() {
-                            final Button btn = new Button("Delete");
+                            final Button btn = new Button(bundle.getString("table.btn.delete"));
 
                             @Override
                             public void updateItem(Button item, boolean empty) {
@@ -347,5 +351,23 @@ public class MainController implements Initializable {
         Scene scene = new Scene(newScene);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void deleteMultiple(ActionEvent actionEvent) {
+        log.debug("click on button delete");
+        List<Long> listId = this.projects
+                            .stream()
+                            .filter(project -> project.getSelect().isSelected())
+                            .map(Project::getId)
+                            .collect(Collectors.toList());
+        log.debug("prepare to delete " + listId.toString());
+        ResponseUpdate response = ProjectServiceClient.deleteMultipleProject(listId);
+        if (response.getSuccess()) {
+            log.debug("delete success");
+            this.fetchData(this.name, this.status);
+        } else {
+            log.debug("delete failure");
+        }
     }
 }

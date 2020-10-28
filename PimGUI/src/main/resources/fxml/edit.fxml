@@ -84,53 +84,53 @@
          >
     <!--        <padding><Insets bottom="10" left="25" right="25" top="10" /></padding>-->
     <GridPane hgap="10.0" vgap="30.0">
-        <Text text="New Project" GridPane.rowIndex="0"  />
+        <Text text="%edit.title.edit" GridPane.rowIndex="0"  />
         <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1"
                    valignment="BOTTOM" styleClass="separator-bottom" />
             <HBox GridPane.columnSpan="3" GridPane.rowIndex="2" minWidth="150">
-                <Label text="Project Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="%edit.lbl.projectnumber" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Text styleClass="red-star" text=" *" />
             </HBox>
         <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="projectNumberTxt" styleClass="format-number"/>
 
         <HBox GridPane.columnSpan="3" GridPane.rowIndex="3" minWidth="150">
-            <Label text="Project Name" />
+            <Label text="%edit.lbl.projectname" />
             <Text styleClass="red-star" text=" *" />
         </HBox>
         <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
                    GridPane.rowIndex="3" fx:id="projectNameTxt"/>
         <HBox GridPane.columnSpan="3" GridPane.rowIndex="4" minWidth="150">
-            <Label text="Customer" />
+            <Label text="%edit.lbl.customer" />
             <Text styleClass="red-star" text=" *" />
         </HBox>
         <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
                    GridPane.rowIndex="4" fx:id="customerTxt"/>
         <HBox GridPane.columnSpan="3" GridPane.rowIndex="5" minWidth="150">
-            <Label text="Group" />
+            <Label text="%edit.lbl.group" />
             <Text styleClass="red-star" text=" *" />
         </HBox>
         <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="5"  fx:id="groupCbb">
         </ComboBox>
-        <Label text="Members" GridPane.columnSpan="3" GridPane.rowIndex="6" minWidth="150" />
+        <Label text="%edit.lbl.memebers" GridPane.columnSpan="3" GridPane.rowIndex="6" minWidth="150" />
         <TextField GridPane.columnIndex="3" GridPane.columnSpan="16"
                    GridPane.rowIndex="6" fx:id="membersTxt"/>
         <HBox GridPane.columnSpan="3" GridPane.rowIndex="7" minWidth="150">
-            <Label text="Status" />
+            <Label text="%edit.lbl.status" />
             <Text styleClass="red-star" text=" *" />
         </HBox>
         <ComboBox prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="7" fx:id="statusInp">
 
         </ComboBox>
         <HBox GridPane.columnSpan="3" GridPane.rowIndex="8" minWidth="150">
-            <Label text="Start Date" />
+            <Label text="%edit.lbl.startdate" />
             <Text styleClass="red-star" text=" *" />
         </HBox>
         <DatePicker prefWidth="149" GridPane.columnIndex="3" GridPane.rowIndex="8" fx:id="startDate" styleClass="format-date"/>
-        <Label text="End Date" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="8" />
+        <Label text="%edit.lbl.endDate" GridPane.columnIndex="10" GridPane.columnSpan="6" GridPane.rowIndex="8" />
         <DatePicker prefWidth="149" GridPane.columnIndex="18" GridPane.rowIndex="8" fx:id="endDate"  styleClass="format-date"/>
-        <Button minWidth="130.0" prefWidth="130.0" text="Cancel" GridPane.columnIndex="4"
+        <Button minWidth="130.0" prefWidth="130.0" text="%edit.btn.cancel" GridPane.columnIndex="4"
                 GridPane.columnSpan="2" GridPane.rowIndex="9" fx:id="cancelBtn"/>
-        <Button minWidth="130.0" prefWidth="130.0" text="Create Project"
+        <Button minWidth="130.0" prefWidth="130.0" text="%edit.btn.create"
                 GridPane.columnIndex="18" GridPane.columnSpan="3" GridPane.rowIndex="9" fx:id="submitBtn"/>
     </GridPane>
 

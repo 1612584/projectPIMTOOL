@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,7 +137,10 @@ public class EditController implements Initializable {
             this.projectNameTxt.setText(this.project.getName());
             this.customerTxt.setText(this.project.getCustomer());
             this.membersTxt.setText(this.project.getVisaList());
-            this.statusInp.setValue(
+//            this.statusInp.setValue(
+//                    new ProjectStatus(this.project.getStatus(), bundle.getString("status." + projectDto.getStatus()))
+//            );
+            this.statusInp.getSelectionModel().select(
                     new ProjectStatus(this.project.getStatus(), bundle.getString("status." + projectDto.getStatus()))
             );
             this.startDate.setValue(this.project.getStartDate());

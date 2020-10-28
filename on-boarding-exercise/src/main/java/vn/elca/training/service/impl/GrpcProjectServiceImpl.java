@@ -91,6 +91,7 @@ public class GrpcProjectServiceImpl implements GrpcProjectService {
     @Override
     public ResponseUpdate deleteMultipleProject(DeleteMultipleRequest request) {
         try {
+
             if (this.projectService.deleteByListId(request.getIdsList()) > 0) {
                 return ResponseUpdate.newBuilder().setSuccess(true).build();
             }

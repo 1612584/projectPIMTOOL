@@ -20,7 +20,7 @@
                GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
         <Image url="@/images/logo_elca.png" />
     </ImageView>
-    <Label text="PROJECT INFORMATION MANAGEMENT" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
+    <Label text="%title" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
 
     <fx:include source="header.fxml" alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0" fx:id="header" />
 
@@ -42,14 +42,14 @@
 
     <GridPane  hgap="10.0" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="10" GridPane.rowIndex="2" fx:id="right">
         <VBox spacing="30" id="projectListVBox">
-            <Text styleClass="header" text="Project List" />
+            <Text styleClass="header" text="%header.title" />
             <Separator valignment="BOTTOM" styleClass="separator-bottom"/>
             <HBox spacing="5">
-                <TextField prefWidth="250" promptText="Project number, name, customer, name" fx:id="nameInp"/>
-                <ComboBox fx:id="statusInp" promptText="Project status">
+                <TextField prefWidth="250" promptText="%search.name" fx:id="nameInp"/>
+                <ComboBox fx:id="statusInp" promptText="%search.status">
                 </ComboBox>
-                <Button text="Search Project" fx:id="searchBtn" onAction="#onSearchSubmit"/>
-                <Button text="Reset Search" fx:id="resetBtn" onAction="#onResetSearch"/>
+                <Button text="%search.btnSearch" fx:id="searchBtn" onAction="#onSearchSubmit"/>
+                <Button text="%search.btReset" fx:id="resetBtn" onAction="#onResetSearch"/>
             </HBox>
             <TableView fx:id="projectTable">
                 <columns>
@@ -58,31 +58,31 @@
                             <PropertyValueFactory property="select"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Number" fx:id="projectNumberColumn" styleClass="format-number">
+                    <TableColumn text="%table.header.number" fx:id="projectNumberColumn" styleClass="format-number">
                         <cellValueFactory>
                             <PropertyValueFactory property="projectNumber" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Name">
+                    <TableColumn text="%table.header.name">
                         <cellValueFactory><PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Status">
+                    <TableColumn text="%table.header.status">
                         <cellValueFactory>
                             <PropertyValueFactory property="status" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Customer">
+                    <TableColumn text="%table.header.customer">
                         <cellValueFactory>
                             <PropertyValueFactory property="customer" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Start Date" styleClass="format-date" fx:id="dateColumn">
+                    <TableColumn text="%table.header.startDate" styleClass="format-date" fx:id="dateColumn">
                         <cellValueFactory>
                             <PropertyValueFactory property="startDate"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Delete" fx:id="deleteColumn">
+                    <TableColumn text="%table.header.delete" fx:id="deleteColumn">
                         <cellValueFactory>
                             <PropertyValueFactory property="deleteBtn" />
                         </cellValueFactory>
@@ -90,6 +90,17 @@
                 </columns>
             </TableView>
             <!--            <Pagination maxPageIndicatorCount="4" />-->
+            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+                <children>
+                    <Region prefHeight="200.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                    <Label text="%table.msg.deletemultiple" />
+                    <VBox alignment="TOP_RIGHT" prefWidth="100.0">
+                        <children>
+                            <Button text="%table.btn.delete" onAction="#deleteMultiple" />
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
         </VBox>
     </GridPane>
     <!-- right end -->
