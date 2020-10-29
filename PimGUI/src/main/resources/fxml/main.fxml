@@ -7,15 +7,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="BASELINE_CENTER" hgap="10" prefHeight="700" prefWidth="900" stylesheets="/styles/main.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.elca.training.controller.MainController">
+<GridPane alignment="BASELINE_CENTER" hgap="10" prefWidth="600" stylesheets="/styles/main.css"
+          styleClass="main-body"
+          vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.elca.training.controller.MainController">
     <!--    top begin   -->
-    <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+    <padding><Insets bottom="10" left="5" right="5" top="10" /></padding>
     <ImageView fitHeight="56" fitWidth="56" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
         <Image url="@/images/logo_elca.png" />
     </ImageView>
-    <Label text="%title" styleClass="main-title" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
+    <Text styleClass="main-title" text="%title" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
 
-    <fx:include fx:id="header" alignment="BASELINE_CENTER" source="header.fxml" GridPane.columnIndex="15" GridPane.rowIndex="0" GridPane.columnSpan="5"/>
+    <fx:include fx:id="header" alignment="BASELINE_CENTER" source="header.fxml" GridPane.columnIndex="15" GridPane.columnSpan="5" GridPane.rowIndex="0" />
 
     <!--    top end  -->
 
@@ -35,22 +37,22 @@
 
     <!--    menu left end -->
 
-    <Separator orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Separator id="vertical-separator" orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
     <!-- right begin -->
 
-    <GridPane fx:id="right" hgap="10.0" prefWidth="800" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="16" GridPane.rowIndex="2">
+    <GridPane fx:id="right" hgap="10.0" prefWidth="700" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="16" GridPane.rowIndex="2">
         <VBox id="projectListVBox" spacing="30">
             <Text styleClass="header" text="%header.title" />
             <Separator styleClass="separator-bottom" valignment="BOTTOM" />
-            <HBox prefWidth="800" spacing="5"  >
+            <HBox prefWidth="800" spacing="5">
                 <TextField fx:id="nameInp" prefWidth="300" promptText="%search.name" />
-                <ComboBox fx:id="statusInp" promptText="%search.status" prefWidth="150">
+                <ComboBox fx:id="statusInp" prefWidth="150" promptText="%search.status">
                 </ComboBox>
-                <Button fx:id="searchBtn" onAction="#onSearchSubmit" text="%search.btnSearch" prefWidth="175" />
-                <Button fx:id="resetBtn" onAction="#onResetSearch" text="%search.btReset" prefWidth="175"/>
+                <Button fx:id="searchBtn" onAction="#onSearchSubmit" prefWidth="175" text="%search.btnSearch" />
+                <Button fx:id="resetBtn" onAction="#onResetSearch" prefWidth="175" text="%search.btReset" />
             </HBox>
-            <TableView fx:id="projectTable" prefWidth="800" prefHeight="400" minHeight="400">
+            <TableView fx:id="projectTable" minHeight="400" prefHeight="400" prefWidth="600">
                 <columns>
                     <TableColumn fx:id="checkBoxColumn" prefWidth="30" styleClass="format-date">
                         <cellValueFactory>
@@ -81,7 +83,7 @@
                             <PropertyValueFactory property="startDate" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="deleteColumn" text="%table.header.delete" styleClass="format-date">
+                    <TableColumn fx:id="deleteColumn" styleClass="format-date" text="%table.header.delete">
                         <cellValueFactory>
                             <PropertyValueFactory property="deleteBtn" />
                         </cellValueFactory>

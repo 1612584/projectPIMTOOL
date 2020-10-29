@@ -6,9 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.util.StringConverter;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.util.resources.cldr.aa.CalendarData_aa_DJ;
 import vn.elca.protobuf.GrpcGroup;
 import vn.elca.protobuf.GrpcGroupList;
 import vn.elca.protobuf.GrpcProjectDto;
@@ -71,6 +74,12 @@ public class EditController implements Initializable {
 
     @FXML
     private Button submitBtn;
+
+    @FXML
+    private Text textError;
+
+    @FXML
+    private Text projectNumnerError;
 
     private MainController mainController;
 
@@ -151,55 +160,146 @@ public class EditController implements Initializable {
         // event on click cancel
         this.cancelBtn.setOnAction(event -> {
             log.debug("click on btn cancel");
+            try {
+                mainController.displayProjectTable();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         this.submitBtn.setOnAction(event -> {
-            // TODO: validate form
-            project.setName(projectNameTxt.getText());
-            project.setVisaList(membersTxt.getText());
-            project.setStartDate(startDate.getValue());
-            project.setEndDate(endDate.getValue());
-            project.setCustomer(customerTxt.getText());
-            project.setVisaList(membersTxt.getText());
-            if (statusInp.getSelectionModel().getSelectedItem() != null) {
-                String statusStr = statusInp.getSelectionModel().getSelectedItem().getStatus();
-//               for ( ProjectStatus status : projectStatusList) {
-//                   if (status.getStatusCode().equals(statusStr) || status.getStatus().equals(statusStr) ) {
-//                       project.setStatus(status.getStatus());
-//                       break;
-//                   }
-//               }
-                project.setStatus(statusStr);
-            }
-            // update project value
-            if (groupCbb.getSelectionModel().getSelectedItem() != null) {
-                project.setGroupId((long) groupCbb.getSelectionModel().getSelectedItem());
-            }
-            if (!editMode) {
-                this.project.setProjectNumber(Integer.parseInt(projectNumberTxt.getText()));
-            }
-            // send update to project
-            ResponseUpdate response = null;
-            if (!editMode) {
-                response = ProjectServiceClient.createProject(project);
-            } else {
-                response = ProjectServiceClient.updateProject(project);
-            }
-            ActionEvent actionEvent = event;
-            if (response.getSuccess() == true) {
-                try {
-                    mainController.onUpdateSuccess(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            clearErorMark();
+            if (isFormValidInternal()) {
+                project.setName(projectNameTxt.getText());
+                project.setVisaList(membersTxt.getText());
+                project.setStartDate(startDate.getValue());
+                project.setEndDate(endDate.getValue());
+                project.setCustomer(customerTxt.getText());
+                project.setVisaList(membersTxt.getText());
+                if (statusInp.getSelectionModel().getSelectedItem() != null) {
+                    String statusStr = statusInp.getSelectionModel().getSelectedItem().getStatus();
+                    project.setStatus(statusStr);
                 }
+                // update project value
+                if (groupCbb.getSelectionModel().getSelectedItem() != null) {
+                    project.setGroupId((long) groupCbb.getSelectionModel().getSelectedItem());
+                }
+                if (!editMode) {
+                    this.project.setProjectNumber(Integer.parseInt(projectNumberTxt.getText()));
+                }
+                // send update to project
+                ResponseUpdate response = null;
+                if (!editMode) {
+                    response = ProjectServiceClient.createProject(project);
+                } else {
+                    response = ProjectServiceClient.updateProject(project);
+                }
+                if (response.getSuccess() == true) {
+                    try {
+                        mainController.onUpdateSuccess(true);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // check conflict project number
+                    if (response.getConflictProjectNumber()) {
+                        // set conflict project number text
+                        projectNumnerError.setText(bundle.getString("edit.txt.conflictProjectNumber"));
+                    }
+                    StringBuilder errors = new StringBuilder();
+                    if (response.getVisaListCount() > 0) {
+                        // set visa list Error
+                        errors.append(bundle.getString("edit.txt.visaDoesNotExist"))
+                              .append(response.getVisaListList().toString())
+                              .append("\n");
+                        setInvalidField(membersTxt);
+                    }
+                    if (response.getInvalidDates()) {
+                        setInvalidField(startDate);
+                        setInvalidField(endDate);
+                        errors.append(bundle.getString("edit.txt.startDateLessThanEndDate"))
+                                .append("\n");
+                    }
+                    Alert alert = new Alert(Alert.AlertType.WARNING, errors.toString());
+                    alert.setTitle(bundle.getString("edit.alert.title"));
+                    alert.setHeaderText(bundle.getString("edit.alert.header"));
+                    alert.show();
+                }
+            } else {
+                // set text error
+                textError.setText(bundle.getString("edit.txt.required"));
             }
         });
 
     }
 
+    private void clearErorMark() {
+        deleteStyle(projectNumberTxt, "error");
+        deleteStyle(projectNameTxt, "error");
+        deleteStyle(customerTxt, "error");
+        deleteStyle(statusInp, "error");
+        deleteStyle(groupCbb, "error");
+        deleteStyle(membersTxt, "error");
+        deleteStyle(startDate, "error");
+        deleteStyle(endDate, "error");
+        textError.setText("");
+        projectNumnerError.setText("");
+    }
+
+    private void deleteStyle(Control projectNumberTxt, String style) {
+        if (projectNumberTxt.getStyleClass().contains(style)) {
+            projectNumberTxt.getStyleClass().remove(style);
+        }
+    }
+
+    private boolean isFormValidInternal() {
+        boolean valid = true;
+        // check project number if ! edit mode
+        if (!editMode) {
+            try {
+                Integer.parseInt(projectNumberTxt.getText());
+            } catch (NumberFormatException numberFormatException) {
+                log.debug("number format invalid");
+                // set invalid error
+                setInvalidField(projectNumberTxt);
+                valid = false;
+            }
+
+        }
+        if (StringUtils.isBlank(projectNameTxt.getText())) {
+            valid = false;
+            setInvalidField(projectNameTxt);
+        }
+        if (StringUtils.isBlank(customerTxt.getText())) {
+            valid = false;
+            setInvalidField(customerTxt);
+        }
+        // check status is not null
+        if (statusInp.getSelectionModel().getSelectedItem() == null) {
+            valid = false;
+            setInvalidField(statusInp);
+        }
+        // check group is not null
+        if (groupCbb.getSelectionModel().getSelectedItem() == null) {
+            valid = false;
+            setInvalidField(groupCbb);
+        }
+        if (startDate.getValue() == null) {
+            valid = false;
+            setInvalidField(startDate);
+        }
+        return valid;
+    }
+
+    private void setInvalidField(Control control) {
+        if (!control.getStyleClass().contains("error")) {
+            control.getStyleClass().add("error");
+            log.debug("Set invalid on field" + control.toString());
+        }
+    }
+
     private void setFormatDatePicker(DatePicker datePicker) {
-        datePicker.setConverter(new StringConverter<LocalDate>()
-        {
+        datePicker.setConverter(new StringConverter<LocalDate>() {
             private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
             @Override

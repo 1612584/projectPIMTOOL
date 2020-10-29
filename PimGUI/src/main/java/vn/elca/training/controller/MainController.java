@@ -18,8 +18,10 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.applet.Main;
 import vn.elca.protobuf.ResponseUpdate;
 import vn.elca.training.MainApp;
+import vn.elca.training.common.CustomUtils;
 import vn.elca.training.mapper.Mapper;
 import vn.elca.training.mapper.StatusConverter;
 import vn.elca.training.model.Project;
@@ -28,6 +30,7 @@ import vn.elca.training.service.ProjectServiceClient;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -345,7 +348,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void displayProjectTable() throws IOException {
+    public void displayProjectTable() throws IOException {
         Stage stage = (Stage) this.left.getScene().getWindow();
         Parent newScene = FXMLLoader.load(MainController.class.getClass().getResource("/fxml/main.fxml"), this.bundle);
         Scene scene = new Scene(newScene);
@@ -368,6 +371,13 @@ public class MainController implements Initializable {
             this.fetchData(this.name, this.status);
         } else {
             log.debug("delete failure");
+            String patern = bundle.getString("table.delete.only_status_new_could_be_delete");
+            CustomUtils.showDialogWarning(
+                    MessageFormat.format(patern, bundle.getString("status.NEW")), bundle.getString("table.delete.fail"), bundle.getString("edit.alert.title"));
+//            Alert alert = new Alert(Alert.AlertType.WARNING, MessageFormat.format(patern, bundle.getString("status.NEW")));
+//            alert.setTitle(bundle.getString("edit.alert.title"));
+//            alert.setHeaderText(bundle.getString("table.delete.fail"));
+//            alert.show();
         }
     }
 }

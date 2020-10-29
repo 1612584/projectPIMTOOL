@@ -1,13 +1,16 @@
+* {
+    -fx-font-family: "Segoe UI";
+}
 .red-star {
     -fx-color: #E46564;
     -fx-fill: red;
 }
-.header {
-    /*-fx-font-size: 35px;*/
-    -fx-border-style: solid solid none solid;
-    -fx-border-width: 5;
-    -fx-border-color: red;
-}
+/*.header {*/
+/*    !*-fx-font-size: 35px;*!*/
+/*    -fx-border-style: solid solid none solid;*/
+/*    -fx-border-width: 5;*/
+/*    -fx-border-color: red;*/
+/*}*/
 .separator-bottom {
     -fx-end-margin: 0;
 }
@@ -18,4 +21,14 @@
 .text-field.error {
     -fx-text-box-border: red ;
     -fx-focus-color: red ;
+
+}
+.combo-box.error,
+.combo-box-base.error {
+    -fx-border-color: red;
+    -fx-border-width: 1 1 1 1
+}
+.text-warning {
+    -fx-font-weight: bold;
+    -fx-fill: red;
 }

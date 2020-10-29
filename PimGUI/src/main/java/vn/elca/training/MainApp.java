@@ -35,22 +35,10 @@ public class MainApp extends Application {
 
         Parent rootNode = loader.load(getClass().getResource(fxmlFile),bundle);
         // get main container
-//        MainController mainController = new MainController();
-//        loader.setController(mainController);
-
-//        FXMLLoader rightLoader = new FXMLLoader();
-//        Parent projectListNode = rightLoader.load(getClass().getResource(projectListFxml), bundle);
-//        // get right panel
-//        ProjectListController projectListController = new ProjectListController();
-//        // set controller
-//        rightLoader.setController(projectListController);
-//        projectListController.setMainController(mainController);
-//        GridPane rightPane = (GridPane) rootNode.lookup("#right");
-//        rightPane.getChildren().add(projectListNode);
         log.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode);
 
-        stage.setTitle("Project Information Management");
+        stage.setTitle(bundle.getString("title"));
         stage.setScene(scene);
         stage.show();
     }

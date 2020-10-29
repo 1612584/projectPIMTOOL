@@ -65,7 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(rollbackOn = Exception.class)
     public ResponseDto createProject(ProjectDto projectDto) throws ConcurrentUpdateException {
         ResponseDto response = new ResponseDto();
-
+        boolean invalid = false;
         if (projectRepository.existsByProjectNumberEquals(projectDto.getProjectNumber())) {
             response.setConflictProjectNumber(true);
             return response;
@@ -89,12 +89,15 @@ public class ProjectServiceImpl implements ProjectService {
                                 .collect(Collectors.toList()));
             if (!notExistedEmployees.isEmpty()) {
                 response.setVisaList(notExistedEmployees);
-                return response;
+                invalid = true;
             }
         }
         if (projectDto.getEndDate() != null &&
                 projectDto.getStartDate().compareTo(projectDto.getEndDate()) > 0) {
             response.setInvalidDates(true);
+            invalid = true;
+        }
+        if (invalid) {
             return response;
         }
         // save project
@@ -143,6 +146,7 @@ public class ProjectServiceImpl implements ProjectService {
         final Group group = groupService.getGroupById(projectDto.getGroupId());
         String visas = projectDto.getVisaString();
         Set<String> visaSet = new HashSet<>();
+        boolean invalid = false;
         if (StringUtils.isNotBlank(visas)){
             visaSet = Arrays.stream(visas.split(","))
                     .filter(StringUtils::isNotBlank)
@@ -156,13 +160,17 @@ public class ProjectServiceImpl implements ProjectService {
 
         ResponseDto response = new ResponseDto();
         response.setConflictProjectNumber(false);
-        if (!notExistedEmployees.isEmpty()) {
-            response.setVisaList(notExistedEmployees);
-            return response;
-        }
         if (projectDto.getEndDate() != null &&
                 projectDto.getStartDate().compareTo(projectDto.getEndDate()) > 0) {
             response.setInvalidDates(true);
+            invalid = true;
+        }
+        if (!notExistedEmployees.isEmpty()) {
+            response.setVisaList(notExistedEmployees);
+            invalid = true;
+        }
+        if (invalid) {
+            return response;
         }
         // save project
         saveProject(group, employees, projectDto);

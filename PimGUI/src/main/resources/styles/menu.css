@@ -1,0 +1,9 @@
+* {
+    -fx-font-family: "Segoe UI";
+}
+#headerMenu {
+    -fx-font-size: 20;
+}
+.header {
+    -fx-font-size: 20;
+}
