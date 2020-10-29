@@ -5,11 +5,19 @@
 <HBox alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="vn.elca.training.controller.HeaderController"
-      stylesheets="/styles/header.css">
-    <Hyperlink text="%header.en" onAction="#changeLang" fx:id="enLink" styleClass="link" />
-    <Text text="|" />
-    <Hyperlink text="%header.fr" onAction="#changeLang" fx:id="frLink" styleClass="link"/>
-    <Hyperlink text="%header.help" styleClass="link" />
-    <Hyperlink text="%header.logout" styleClass="link" />
+      stylesheets="/styles/header.css"
+    spacing="25">
+    <HBox>
+        <Hyperlink text="%header.en" onAction="#changeLang" fx:id="enLink" styleClass="link" />
+        <Text text="|" />
+        <Hyperlink text="%header.fr" onAction="#changeLang" fx:id="frLink" styleClass="link"/>
+    </HBox>
+    <HBox>
+        <Hyperlink text="%header.help" styleClass="link" />
+    </HBox>
+    <HBox>
+        <Hyperlink text="%header.logout" styleClass="link" />
+
+    </HBox>
 </HBox>
 

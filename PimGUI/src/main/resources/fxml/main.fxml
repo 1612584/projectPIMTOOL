@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
@@ -9,20 +7,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import vn.elca.training.factory.CheckBoxTableCellFactory?>
-<GridPane
-        alignment="BASELINE_CENTER" hgap="10" prefWidth="900" prefHeight="700" vgap="10" xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="vn.elca.training.controller.MainController"
-        stylesheets="/styles/main.css">
+<GridPane alignment="BASELINE_CENTER" hgap="10" prefHeight="700" prefWidth="900" stylesheets="/styles/main.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.elca.training.controller.MainController">
     <!--    top begin   -->
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
-    <ImageView fitHeight="56" fitWidth="56" pickOnBounds="true" preserveRatio="true"
-               GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
+    <ImageView fitHeight="56" fitWidth="56" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">
         <Image url="@/images/logo_elca.png" />
     </ImageView>
-    <Label text="%title" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
+    <Label text="%title" styleClass="main-title" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
 
-    <fx:include source="header.fxml" alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0" fx:id="header" />
+    <fx:include fx:id="header" alignment="BASELINE_CENTER" source="header.fxml" GridPane.columnIndex="15" GridPane.rowIndex="0" GridPane.columnSpan="5"/>
 
     <!--    top end  -->
 
@@ -30,59 +23,65 @@
 
     <!--    menu left begin -->
 
-    <GridPane GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" fx:id="left">
+    <GridPane fx:id="left" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
         <fx:include source="menu.fxml" />
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
     <!--    menu left end -->
 
-    <Separator orientation="VERTICAL"  GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Separator orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
     <!-- right begin -->
 
-    <GridPane  hgap="10.0" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="10" GridPane.rowIndex="2" fx:id="right">
-        <VBox spacing="30" id="projectListVBox">
+    <GridPane fx:id="right" hgap="10.0" prefWidth="800" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="16" GridPane.rowIndex="2">
+        <VBox id="projectListVBox" spacing="30">
             <Text styleClass="header" text="%header.title" />
-            <Separator valignment="BOTTOM" styleClass="separator-bottom"/>
-            <HBox spacing="5">
-                <TextField prefWidth="250" promptText="%search.name" fx:id="nameInp"/>
-                <ComboBox fx:id="statusInp" promptText="%search.status">
+            <Separator styleClass="separator-bottom" valignment="BOTTOM" />
+            <HBox prefWidth="800" spacing="5"  >
+                <TextField fx:id="nameInp" prefWidth="300" promptText="%search.name" />
+                <ComboBox fx:id="statusInp" promptText="%search.status" prefWidth="150">
                 </ComboBox>
-                <Button text="%search.btnSearch" fx:id="searchBtn" onAction="#onSearchSubmit"/>
-                <Button text="%search.btReset" fx:id="resetBtn" onAction="#onResetSearch"/>
+                <Button fx:id="searchBtn" onAction="#onSearchSubmit" text="%search.btnSearch" prefWidth="175" />
+                <Button fx:id="resetBtn" onAction="#onResetSearch" text="%search.btReset" prefWidth="175"/>
             </HBox>
-            <TableView fx:id="projectTable">
+            <TableView fx:id="projectTable" prefWidth="800" prefHeight="400" minHeight="400">
                 <columns>
-                    <TableColumn fx:id="checkBoxColumn" styleClass="format-date">
+                    <TableColumn fx:id="checkBoxColumn" prefWidth="30" styleClass="format-date">
                         <cellValueFactory>
-                            <PropertyValueFactory property="select"/>
+                            <PropertyValueFactory property="select" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.number" fx:id="projectNumberColumn" styleClass="format-number">
+                    <TableColumn fx:id="projectNumberColumn" prefWidth="100" styleClass="format-number" text="%table.header.number">
                         <cellValueFactory>
                             <PropertyValueFactory property="projectNumber" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.name">
+                    <TableColumn prefWidth="137.0" text="%table.header.name">
                         <cellValueFactory><PropertyValueFactory property="name" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.status">
+                    <TableColumn prefWidth="107.0" text="%table.header.status">
                         <cellValueFactory>
                             <PropertyValueFactory property="status" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.customer">
+                    <TableColumn prefWidth="121.0" text="%table.header.customer">
                         <cellValueFactory>
                             <PropertyValueFactory property="customer" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.startDate" styleClass="format-date" fx:id="dateColumn">
+                    <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="123.0" styleClass="format-date" text="%table.header.startDate">
                         <cellValueFactory>
-                            <PropertyValueFactory property="startDate"/>
+                            <PropertyValueFactory property="startDate" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="%table.header.delete" fx:id="deleteColumn">
+                    <TableColumn fx:id="deleteColumn" text="%table.header.delete" styleClass="format-date">
                         <cellValueFactory>
                             <PropertyValueFactory property="deleteBtn" />
                         </cellValueFactory>
@@ -92,50 +91,49 @@
             <!--            <Pagination maxPageIndicatorCount="4" />-->
             <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
                 <children>
-                    <Region prefHeight="200.0" prefWidth="330.0" HBox.hgrow="ALWAYS" />
+                    <Region prefHeight="200.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
                     <Label text="%table.msg.deletemultiple" />
                     <VBox alignment="TOP_RIGHT" prefWidth="100.0">
                         <children>
-                            <Button text="%table.btn.delete" onAction="#deleteMultiple" />
+                            <Button onAction="#deleteMultiple" text="%table.btn.delete" />
                         </children>
                     </VBox>
                 </children>
             </HBox>
         </VBox>
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
     <!-- right end -->
 </GridPane>
-<!--<GridPane-->
-<!--        alignment="BASELINE_CENTER" hgap="10" prefWidth="900" prefHeight="700" vgap="10" xmlns:fx="http://javafx.com/fxml/1"-->
-<!--        fx:controller="vn.elca.training.controller.MainController"-->
-<!--        stylesheets="/styles/main.css">-->
-<!--    &lt;!&ndash;    top begin   &ndash;&gt;-->
-<!--    <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>-->
-<!--    <ImageView fitHeight="56" fitWidth="56" pickOnBounds="true" preserveRatio="true"-->
-<!--               GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.rowIndex="0">-->
-<!--        <Image url="@/images/logo_elca.png" />-->
-<!--    </ImageView>-->
-<!--    <Label text="PROJECT INFORMATION MANAGEMENT" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />-->
-
-<!--    <fx:include source="header.fxml" alignment="center" GridPane.columnIndex="11" GridPane.rowIndex="0" fx:id="header" />-->
-
-<!--    &lt;!&ndash;    top end  &ndash;&gt;-->
-
-<!--    <Separator GridPane.columnIndex="0" GridPane.columnSpan="20" GridPane.rowIndex="1" />-->
-
-<!--    &lt;!&ndash;    menu left begin &ndash;&gt;-->
-
-<!--    <GridPane GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" fx:id="left">-->
-<!--        <fx:include source="menu.fxml" />-->
-<!--    </GridPane>-->
-
-<!--    &lt;!&ndash;    menu left end &ndash;&gt;-->
-
-<!--    <Separator orientation="VERTICAL"  GridPane.columnIndex="1" GridPane.rowIndex="2"/>-->
-
-<!--    &lt;!&ndash; right begin &ndash;&gt;-->
-
-<!--    <GridPane  hgap="10.0" vgap="30.0" GridPane.columnIndex="2" GridPane.columnSpan="10" GridPane.rowIndex="2" fx:id="right">-->
-<!--    </GridPane>-->
-<!--    &lt;!&ndash; right end &ndash;&gt;-->
-<!--</GridPane>-->
